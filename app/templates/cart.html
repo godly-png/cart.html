@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #f7fafc;
+    color: #222;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #111;
+  }
+
+  .cart-item {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 18px;
+  }
+
+  .cart-item img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .item-details {
+    flex: 1;
+  }
+
+  .item-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .item-price {
+    color: #ff7b00;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 5px;
+  }
+
+  .qty {
+    margin-top: 8px;
+  }
+
+  .qty input {
+    width: 60px;
+    padding: 5px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .btn-remove {
+    background: #ff4b4b;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .btn-remove:hover {
+    background: #e13636;
+  }
+
+  .summary-box {
+    margin-top: 30px;
+    text-align: right;
+  }
+
+  .total {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .checkout-btn {
+    background: #ff7b00;
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  .checkout-btn:hover {
+    background: #e96b00;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Your Shopping Cart</h1>
+
+  {% for item in cart_items %}
+  <div class="cart-item">
+    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+    
+    <div class="item-details">
+      <div class="item-title">{{ item.product.name }}</div>
+      <div class="item-price">$ {{ item.product.price }}</div>
+
+      <!-- Quantity update -->
+      <form action="{% url 'update_from_cart' item.id %}" method="POST">
+        {% csrf_token %}
+        <div class="qty">
+          <input type="number" name="quantity" value="{{ item.quantity }}" min="1" onchange="this.form.submit()">
+        </div>
+      </form>
+
+      <!-- Remove item -->
+      <a href="{% url 'remove_from_cart' item.id %}" class="btn-remove">Remove</a>
+
+    </div>
+  </div>
+  {% empty %}
+  <h2 style="text-align:center; color:#666;">Your cart is empty.</h2>
+  {% endfor %}
+
+  <div class="summary-box">
+    <div class="total">Total: ${{ total_amount }}</div>
+    <a href="#" class="checkout-btn">Proceed to Checkout</a>
+  </div>
+
+</div>
+
+</body>
+</html>

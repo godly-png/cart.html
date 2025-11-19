@@ -1,0 +1,188 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kids Dress Collection</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f7fafc;
+    color: #222;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #111;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .card img {
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 15px 18px 25px;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #111;
+  }
+
+  .card-category {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .price {
+    font-weight: 700;
+    color: #ff7b00;
+    font-size: 1rem;
+  }
+
+  .actions {
+    margin-top: 12px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #ff7b00;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.25s;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background: #e96b00;
+  }
+
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+    .card img {
+      height: 260px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>men collection</h1>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <a href="{% url 'product_details' 7 %}"><img src="{% static 'dress/com dress.jpeg' %}" alt="Floral Kids Dress"></a>
+        <div class="card-content">
+          <div class="card-title">Floral Kids Dress</div>
+          <div class="card-category">Girls · Summer</div>
+          <div class="price">$29.00</div>
+          <div class="actions">
+          <a href="{% url 'product_details' 7 %}" class="btn">Add to Cart</a>
+          <a href="whislist.html" class="btn">Whislist</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+       <a href="{% url 'product_details' 10 %}"><img src="{% static 'dress/men.jpeg' %}"alt="Denim Dungaree for Kids"></a>
+        <div class="card-content">
+          <div class="card-title">Denim Dungaree</div>
+          <div class="card-category">Boys · Casual</div>
+          <div class="price">$35.00</div>
+          <div class="actions">
+          <a href="{% url 'product_details' 10 %}" class="btn">Add to Cart</a>
+            <a href="whislist.html" class="btn">Whislist</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <a href="{% url 'product_details' 11 %}"><img src="{% static 'dress/print.jpeg' %}" alt="Party Frock for Girls">
+        <div class="card-content">
+          <div class="card-title">Party Frock</div>
+          <div class="card-category">Girls · Partywear</div>
+          <div class="price">$49.00</div>
+          <div class="actions">
+            <a href="{% url 'product_details' 11 %}" class="btn">Add to Cart</a>
+             <a href="whislist.html" class="btn">Whislist</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <a href="{% url 'product_details' 14 %}"><img src="{% static 'dress/men dresss.jpeg' %}" alt="Casual T-Shirt and Shorts Set">
+        <div class="card-content">
+          <div class="card-title">Casual T-Shirt & Shorts</div>
+          <div class="card-category">Boys · Everyday</div>
+          <div class="price">$25.00</div>
+          <div class="actions">
+            <a href="{% url 'product_details' 14 %}" class="btn">Add to Cart</a>
+             <a href="whislist.html" class="btn">Whislist</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+         <a href="{% url 'product_details' 16 %}"><img src="{% static 'dress/combo dress.jpeg' %}" alt="Princess Gown for Kids">
+        <div class="card-content">
+          <div class="card-title">Princess Gown</div>
+          <div class="card-category">Girls · Fancy</div>
+          <div class="price">$59.00</div>
+          <div class="actions">
+            <a href="{% url 'product_details' 16 %}"class="btn">Add to Cart</a>
+            <a href="whislist.html"class="btn">Whislist</a>
+          </div>
+        </div>
+      </div>
+
+   
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
