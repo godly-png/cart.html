@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
+        .summary-box { width: 600px; margin: auto; padding: 20px; background: #fff; border-radius: 10px;
+                       box-shadow: 0 0 10px rgba(0,0,0,0.15); }
+        h2 { text-align: center; }
+        h3 { margin-top: 25px; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        table th, table td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        .total { text-align: right; font-size: 20px; margin-top: 20px; font-weight: bold; }
+        .pay-btn { width: 100%; padding: 12px; background: #0d6efd; color: white; border-radius: 8px;
+                   border: none; font-size: 18px; margin-top: 25px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="summary-box">
+
+    <h2>Order Summary</h2>
+
+    <h3>Billing Information</h3>
+    <p><b>Name:</b> {{ order.billing_details.full_name }}</p>
+    <p><b>Email:</b> {{ order.billing_details.email }}</p>
+    <p><b>Phone:</b> {{ order.billing_details.phone_number }}</p>
+    <p><b>Address:</b> {{ order.billing_details.address }}</p>
+    <p><b>City:</b> {{ order.billing_details.city }}</p>
+    <p><b>State:</b> {{ order.billing_details.state }}</p>
+    <p><b>Pincode:</b> {{ order.billing_details.pincode }}</p>
+
+    <h3>Order Items</h3>
+
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Qty</th>
+            <th>Subtotal (₹)</th>
+        </tr>
+
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p class="total">Grand Total: ₹{{ order.total_amount }}</p>
+
+    <!-- PAYMENT BUTTON -->
+    <button class="pay-btn" id="pay-button">Pay Now</button>
+
+</div>
+
+<!-- RAZORPAY SCRIPT -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.getElementById("pay-button").onclick = function(e){
+    var options = {
+        "key": "{{ razorpay_key }}",  
+        "amount": "{{ amount }}",     
+        "currency": "INR",
+        "name": "My Shop",
+        "description": "Order Payment",
+        "order_id": "{{ razorpay_order_id }}", 
+        "prefill": {
+            "name": "{{ order.billing_details.full_name }}",
+            "email": "{{ order.billing_details.email }}",
+            "contact": "{{ order.billing_details.phone_number }}"
+        },
+        "handler": function (response){
+            alert("Payment Successful!");
+            window.location.href = "/order-success/";
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+</body>
+</html>

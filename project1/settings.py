@@ -110,6 +110,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+RAZORPAY_KEY_ID ='rzp_test_RjbHh9BhN91Vdc'
+RAZORPAY_KEY_SECRET= '04dZ8IcJ7NaBRLcHxcTpyvKb'
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -124,3 +127,11 @@ STATICFILES_DIRS=[BASE_DIR / "C:/Users/godly/OneDrive/Desktop/new project/projec
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR / 'media'
+
+
+
+
+# Login / Logout URLs
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
