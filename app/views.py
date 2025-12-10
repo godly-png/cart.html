@@ -135,6 +135,14 @@ def logout_view(request):
     return redirect('login')
 
 
+from django.shortcuts import render
+
+def dashboard_view(request):
+    return render(request, 'dashboard.html')  # create dashboard.html template
+
+
+
+
 # -------------------------------
 # CHECKOUT - CORRECTED VERSION
 # -------------------------------
